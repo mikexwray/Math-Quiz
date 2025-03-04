@@ -1,7 +1,6 @@
+
 import random
 import time
-
-
 
 operators = ["+", "-", "*", "/"]
 
@@ -11,9 +10,7 @@ max_operand = 12
 
 total_problems = 10
 
-score = 5
-
-
+score = 10
 
 input('Press Enter to Begin ')
 print('----------------------------------------')
@@ -33,23 +30,20 @@ def generate_problem():
             right = random.randint(min_operand, max_operand)
             operator = '/'
         else:
-            answer = eval(expr)
+            answer = int(eval(expr))
             return expr, answer
 
-        
-
-
-
+    
 for i in range(total_problems):
     expr, answer = generate_problem()
     while True:
-        guess = input(f'Problem #{i + 1}: {expr} = ')
-        if int(guess) == int(answer):
+        guess = input(f'Problem #{i + 1}: {expr} = ').strip()
+        if str(guess) == str(answer):
             break
         elif first_try < 1:
             score -= 1
             first_try += 1
-
+            print("Try again!")
         
         
 
@@ -57,11 +51,7 @@ final_time = time.time()
 
 total_time = round(final_time - start_time, 2)
 
-
-
-    
 print('----------------------------------------')
 print(f'Congrats! Your total time was: {total_time} seconds')
 print(f'You got a score of {score}/{total_problems}')
 
-generate_problem()
